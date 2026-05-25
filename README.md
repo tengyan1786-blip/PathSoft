@@ -6,6 +6,12 @@ This repository includes the two-stage code used in our experiments:
 2. `pathsoft/`: second-stage PathSoftAdapter training and inference with a frozen LLM.
 
 
+
+## Framework Diagram
+
+![Framework diagram](figure/approach.pdf)
+
+
 ## Repository Contents
 
 ```text
