@@ -9,7 +9,7 @@ This repository includes the two-stage code used in our experiments:
 
 ## Framework Diagram
 
-![Framework diagram](figure/approach.pdf)
+![Framework diagram](figure/approach.png)
 
 
 ## Repository Contents
