@@ -49,7 +49,7 @@ def load_grouped_scored_paths(path):
                     "qid": row.get("qid", row.get("question_id", row["question"])),
                 }
             )
-    print(f"加载 grouped scored paths: {len(samples)} 条 from {path}")
+    print(f"Loaded grouped scored paths: {len(samples)} samples from {path}")
     return samples
 
 
@@ -71,7 +71,7 @@ def load_raw_data(data_dir, split="train"):
                 "answer": item["answer"],
             }
         )
-    print(f"加载 {split} 集: {len(samples)} 条")
+    print(f"Loaded {split} split: {len(samples)} samples")
     return samples
 
 
@@ -96,10 +96,10 @@ def precompute_bert_embeddings(
                 all_texts.add(node)
 
     all_texts = list(all_texts)
-    print(f"总共 {len(all_texts)} 个唯一文本需要编码")
+    print(f"Encoding {len(all_texts)} unique text entries")
 
     text_to_embed = {}
-    for i in tqdm(range(0, len(all_texts), batch_size), desc="BERT编码"):
+    for i in tqdm(range(0, len(all_texts), batch_size), desc="BERT encoding"):
         batch_texts = all_texts[i : i + batch_size]
         encoded = bert_tokenizer(
             batch_texts,
@@ -117,7 +117,7 @@ def precompute_bert_embeddings(
     processed = []
     bert_dim = 768
 
-    for sample in tqdm(samples, desc="组装样本"):
+    for sample in tqdm(samples, desc="Building samples"):
         question_embed = text_to_embed[sample["question"]]
         paths = sample["paths"][:max_paths]
         scores = sample["path_scores"][:max_paths]
@@ -150,7 +150,7 @@ def precompute_bert_embeddings(
 
     if save_path:
         torch.save(processed, save_path)
-        print(f"预计算embedding已保存到 {save_path}")
+        print(f"Saved precomputed embeddings to {save_path}")
 
     return processed
 
